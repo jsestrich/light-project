@@ -1,0 +1,6 @@
+[submodule "openpixelcontrol"]
+	path = openpixelcontrol
+	url = https://github.com/jsestrich/openpixelcontrol
+[submodule "fadecandy"]
+	path = fadecandy
+	url = https://github.com/jsestrich/fadecandy.git
