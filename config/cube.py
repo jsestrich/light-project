@@ -4,11 +4,23 @@ import sys
 
 from base import CubeLights
 
+if len(sys.argv) > 1:
+    if len(sys.argv) != 4:
+        print "usage: cube.py [width depth height]"
+    width =  sys.argv[1]
+    depth =  sys.argv[2]
+    height = sys.argv[3]
+elif len(sys.argv) == 1:
+    width = 12
+    depth = 8
+    height = 60
+else:
+    raise Error("Not possible?!")
+
+
 class CubeLightsLayout(CubeLights):
   def __init__(self):
-    super(CubeLightsLayout, self).__init__(sys.argv[1],
-                                           sys.argv[2],
-                                           sys.argv[3])
+    super(CubeLightsLayout, self).__init__(width, depth, height)
 
   def GenerateLayout(self):
     points = []
@@ -31,8 +43,5 @@ class CubeLightsLayout(CubeLights):
     f = open(sys.argv[0] + '.json', 'w')
     f.write('[\n' + ',\n'.join(lines) + '\n]')
     f.close()
-
-if len(sys.argv) != 4:
-  print "usage: cube.py width depth height"
 
 CubeLightsLayout().GenerateLayout()
