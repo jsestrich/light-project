@@ -3,6 +3,7 @@ all: bin/cube_sim bin/run_fcserver clients/cpp clients/python
 clean:
 	-rm -r bin
 	-rm config/*.json
+	-rm clients/python/opc.py*
 	cd fadecandy/server && make clean
 	cd openpixelcontrol && make clean
 	cd clients/cpp && make clean
@@ -17,8 +18,11 @@ fadecandy/server/fcserver: force_look
 clients/cpp: force_look
 	cd clients/cpp && make
 
-clients/python: force_look
+clients/python: clients/python/opc.py force_look
 	cd clients/python && make
+
+clients/python/opc.py: fadecandy/examples/python/opc.py
+	ln -s `pwd`/$^ $@
 
 config/cube.py.json: config/cube.py config/base.py
 	cd config && ./cube.py
