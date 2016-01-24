@@ -12,8 +12,8 @@ class CubeLightsLayout(CubeLights):
 
   def GenerateLayout(self):
     points = []
-    for x in range(self.width):
-      for y in range(self.depth):
+    for y in range(self.depth):
+      for x in range(self.width):
         for z in range(self.height):
           points.append(
               (x / self.xd - self.xl / 2.0,
@@ -34,5 +34,5 @@ class CubeLightsLayout(CubeLights):
 
 if len(sys.argv) != 4:
   print "usage: cube.py width depth height"
-    
+
 CubeLightsLayout().GenerateLayout()
