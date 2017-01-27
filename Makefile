@@ -3,6 +3,7 @@ all: bin/cube_sim bin/run_fcserver clients/cpp clients/python
 clean:
 	-rm -r bin
 	-rm config/*.json
+	-rm config/*.pyc
 	-rm clients/python/opc.py*
 	cd fadecandy/server && make clean
 	cd openpixelcontrol && make clean
