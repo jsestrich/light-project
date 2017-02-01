@@ -8,6 +8,7 @@ numLEDs = 6000
 client = opc.Client('localhost:8080')
 
 black = [ (0,0,0) ] * numLEDs
+#white = [ (0,0,0) ] * numLEDs
 white = [ (255,255,255) ] * numLEDs
 
 while True:

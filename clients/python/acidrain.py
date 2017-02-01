@@ -7,7 +7,7 @@ def GetColor():
           random.getrandbits(8),
           random.getrandbits(8))
 
-strands = 12
+strands = 96
 numLEDs = strands * 60
 client = opc.Client('localhost:8080')
 
@@ -33,5 +33,5 @@ while True:
       drop['start'] = index
       drop['speed'] = random.randint(100, 400) / 100.0
   index += 1
-  time.sleep(1.0 / 300)
+  time.sleep(1.0 / 120)
   client.put_pixels(pixels)

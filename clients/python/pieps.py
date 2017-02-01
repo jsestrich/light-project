@@ -62,21 +62,27 @@ def ToPixelLevel(h, level):
     dist = min(line_width, math.fabs((h - height / 2) - level * height))
     return (line_width - dist) * 255
 
+def Clamp(v, maxV):
+    v += maxV
+    v = v % (2 * maxV)
+    v -= maxV
+    return v
+
+indexW = 0
+indexD = 0
+indexH = 0
 while True:
-  pos = index * speed
   for w in range(width):
       for d in range(depth):
-          red = DualWaveValue(w + pos, d + pos, prop['red'])
-          green = DualWaveValue(w + pos, d + pos, prop['green'])
-          blue = DualWaveValue(w + pos, d + pos, prop['blue'])
           for h in range(height):
               i = d * width * height + w * height + h
-              pixels[i] = (
-                  ToPixelLevel(h, red),
-                  ToPixelLevel(h, green),
-                  ToPixelLevel(h, blue)
-                  )
+              red = abs(int( Clamp(indexW + w, width) * 1.0 / width * 255))
+              green = abs(int( Clamp(indexD + d, depth) * 1.0 / depth * 255))
+              blue = abs(int( Clamp(indexH + h, height) * 1.0 / height * 255))
+	      pixels[i] = (red, green, blue)
 
   client.put_pixels(pixels)
-  index += 1
-  time.sleep(0.005)
+  indexW = Clamp(indexW + .1 * width, width)
+  indexD = Clamp(indexD + .1 * depth, depth)
+  indexH = Clamp(indexH + .1 * height, height)
+  time.sleep(0.05)
